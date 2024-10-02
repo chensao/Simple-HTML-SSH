@@ -10,7 +10,7 @@ const wss = new WebSocket.Server({ server });
 app.use(express.static('public'));
 
 wss.on('connection', (ws) => {
-    console.log('WS client Success! Chensao Code:022001');
+    console.log('WS client Success!');
 
     const ssh = new SSHClient();
 
@@ -43,17 +43,17 @@ wss.on('connection', (ws) => {
         console.error('SSH connection error:', err);
         ws.send(`SSH connection error: ${err.message}`);
     });
-
+// SSH Connection details
     ssh.connect({
-        host: '45.154.2.232',
-        port: 22,
-        username: 'test',
-        password: 'fr0TkiqD7GZbHeoWoWNn'
+        host: 'ENTER IP ADDRESS',  // Host address IP, for localhost: 127.0.0.1 (this function has not been tested but it should work)
+        port: 22,  // change this if you are connecting your server on another port.
+        username: 'usrname',  // what is your user name
+        password: 'password' // ssh password information, if you are using a private key, see below
         // 私钥？:
         // privateKey: require('fs').readFileSync('/path/to/private/key')
     });
 });
 
-server.listen(58943, () => {
+server.listen(58943, () => {  // change the number in this line if you want to use a different websocket port.
     console.log('Success! Running Port: 58943');
 });
